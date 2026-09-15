@@ -1,3 +1,4 @@
-# pnm-hochan
-
-Kho mã nguồn cá nhân phục vụ cho các bài thực hành.
+## Giấy phép
+Mã nguồn trong kho này được phát hành
+theo [Giấy phép MIT](LICENSE).
+SPDX-License-Identifier: MIT
