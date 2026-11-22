@@ -1,0 +1,54 @@
+
+{% extends "base.html" %}
+
+{% block title %}
+    Trang cá nhân | Flask Lab
+{% endblock %}
+
+{% block content %}
+
+<div class="page-heading">
+
+    <a class="back-link" href="{{ url_for('menu') }}">
+        ← Về menu
+    </a>
+
+    <h1>Trang cá nhân</h1>
+
+    <p>
+        Chỉ tài khoản đã đăng nhập mới xem được trang này.
+    </p>
+
+</div>
+
+<section class="panel narrow profile-panel">
+
+    <div class="profile-avatar" aria-hidden="true">
+        {{ session['user'][:1]|upper }}
+    </div>
+
+    <h2>Xin chào {{ session['user'] }}!</h2>
+
+    <p>Bạn đã đăng nhập thành công vào Flask Lab.</p>
+
+    <div class="profile-detail">
+        <span>Tài khoản</span>
+        <strong>{{ session['user'] }}</strong>
+    </div>
+
+    <div class="profile-detail">
+        <span>Ghi nhớ đăng nhập</span>
+        <strong>
+            {{ 'Đã bật (7 ngày)' if session.permanent else 'Không bật' }}
+        </strong>
+    </div>
+
+    <form action="{{ url_for('logout') }}" method="POST">
+        <button type="submit" class="primary-btn">
+            Đăng xuất
+        </button>
+    </form>
+
+</section>
+
+{% endblock %}

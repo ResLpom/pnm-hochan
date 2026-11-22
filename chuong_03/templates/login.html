@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Đăng nhập | Flask Lab</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body class="login-body">
+
+    <div class="login-scene" aria-hidden="true">
+        <span class="scene-shape shape-one"></span>
+        <span class="scene-shape shape-two"></span>
+    </div>
+
+    <main class="login-shell">
+
+        <section class="login-intro"
+                 aria-label="Giới thiệu Flask Lab">
+
+            <a class="login-brand" href="{{ url_for('menu') }}">
+                <span class="login-brand-icon">F</span>
+                <span>Flask Lab</span>
+            </a>
+
+            <span class="intro-tag">
+                Exemple for Students
+            </span>
+
+            <h1>
+                WELCOME TO FLASK.
+                <br>
+                <em>Knowledge is Power.</em>
+            </h1>
+
+            <p>Learn Today, Lead Tomorrow.</p>
+
+            <div class="intro-features">
+                <span>CALCULATOR</span>
+                <span>SCORE</span>
+                <span>BMI</span>
+            </div>
+
+        </section>
+
+        <section class="login-panel"
+                 aria-label="Biểu mẫu đăng nhập">
+
+            <div class="login-panel-heading">
+
+                <span class="login-mini-mark"
+                      aria-hidden="true">↗</span>
+
+                <h2>LOGIN TO FLASK LAB</h2>
+
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+
+                {% if messages %}
+
+                    {% for category, message in messages %}
+
+                        <div class="flash flash-{{ category }} login-message"
+                             role="alert">
+                            {{ message }}
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+            {% endwith %}
+
+            <form action="{{ url_for('login') }}"
+                  method="POST"
+                  novalidate>
+
+                <div class="login-field">
+
+                    <label for="username">
+                        Tên đăng nhập
+                    </label>
+
+                    <input
+                        id="username"
+                        name="username"
+                        type="text"
+                        autocomplete="username"
+                        placeholder="Nhập tên đăng nhập"
+                        value="{{ username }}"
+                        autocapitalize="none"
+                        spellcheck="false"
+                        autofocus
+                    >
+
+                </div>
+
+                <div class="login-field">
+
+                    <label for="password">
+                        Mật khẩu
+                    </label>
+
+                    <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        autocomplete="current-password"
+                        placeholder="Nhập mật khẩu"
+                    >
+
+                </div>
+
+                <label class="remember-choice">
+
+                    <input
+                        type="checkbox"
+                        name="remember"
+                        value="on"
+                        {{ "checked" if remember else "" }}
+                    >
+
+                    <span>
+                        Ghi nhớ đăng nhập trên thiết bị này
+                    </span>
+
+                </label>
+
+                <button type="submit" class="login-submit">
+
+                    Đăng nhập
+
+                    <span aria-hidden="true">→</span>
+
+                </button>
+
+            </form>
+
+            <p class="register-login-link">
+                Chưa có tài khoản?
+                <a href="{{ url_for('register') }}">
+                    Đăng ký tài khoản
+                </a>
+            </p>
+
+            <a class="login-back" href="{{ url_for('menu') }}">
+                ← Trở về trang chủ
+            </a>
+
+            <div class="login-footnote">
+                Trang đăng nhập dành cho bài thực hành Flask và Jinja2.
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

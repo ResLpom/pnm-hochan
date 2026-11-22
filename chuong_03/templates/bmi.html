@@ -1,0 +1,132 @@
+
+{% extends "base.html" %}
+
+{% block title %}Tính chỉ số BMI{% endblock %}
+
+{% block content %}
+
+<div class="page-heading">
+
+    <a class="back-link" href="{{ url_for('menu') }}">
+        ← Về menu
+    </a>
+
+    <h1>Tính chỉ số BMI</h1>
+
+    <p>
+        Nhập chiều cao và cân nặng để tính BMI
+        và phân loại theo ngưỡng châu Á.
+    </p>
+
+</div>
+
+<section class="panel narrow">
+
+    <form method="POST" novalidate>
+
+        <div class="field">
+
+            <label for="height">Chiều cao (cm)</label>
+
+            <input
+                id="height"
+                name="height"
+                type="text"
+                inputmode="decimal"
+                placeholder="Ví dụ: 170 hoặc 170,5"
+                value="{{ values.height }}"
+                class="{{ 'invalid' if errors.height else '' }}"
+            >
+
+            {% if errors.height %}
+                <p class="error">{{ errors.height }}</p>
+            {% else %}
+                <p class="field-help">
+                    Cho phép từ 50 đến 250 cm.
+                </p>
+            {% endif %}
+
+        </div>
+
+        <div class="field">
+
+            <label for="weight">Cân nặng (kg)</label>
+
+            <input
+                id="weight"
+                name="weight"
+                type="text"
+                inputmode="decimal"
+                placeholder="Ví dụ: 65 hoặc 65,5"
+                value="{{ values.weight }}"
+                class="{{ 'invalid' if errors.weight else '' }}"
+            >
+
+            {% if errors.weight %}
+                <p class="error">{{ errors.weight }}</p>
+            {% else %}
+                <p class="field-help">
+                    Cho phép từ 10 đến 300 kg.
+                </p>
+            {% endif %}
+
+        </div>
+
+        <div class="hint">
+            <strong>Công thức:</strong>
+            BMI = Cân nặng (kg) / [Chiều cao (m)]².
+            <br>
+
+            <strong>Phân loại:</strong>
+            dưới 18,5: Thiếu cân;
+            dưới 23: Bình thường;
+            dưới 25: Thừa cân;
+            từ 25: Béo phì.
+        </div>
+
+        <button type="submit" class="primary-btn">
+            Tính BMI →
+        </button>
+
+    </form>
+
+    {% if result is not none %}
+
+        {% set bmi, category, color, ideal_min, ideal_max = result %}
+
+        <div class="result-box bmi-result {{ color }}">
+
+            <span>CHỈ SỐ BMI CỦA BẠN</span>
+
+            <strong>
+                {{ "%.1f"|format(bmi) }}
+            </strong>
+
+            <b>{{ category }}</b>
+
+        </div>
+
+        <div class="bmi-ideal">
+
+            <div class="ideal-label">
+                KHOẢNG CÂN NẶNG THAM KHẢO
+            </div>
+
+            <div class="ideal-value">
+                {{ "%.1f"|format(ideal_min) }}
+                –
+                {{ "%.1f"|format(ideal_max) }} kg
+            </div>
+
+            <p>
+                Ứng với BMI từ 18,5 đến 22,9
+                ở chiều cao đã nhập.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,153 @@
+
+{% from "_form_macros.html" import render_field %}
+
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Đăng ký | Flask Lab</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body class="login-body">
+
+    <div class="login-scene" aria-hidden="true">
+
+        <span class="scene-shape shape-one"></span>
+        <span class="scene-shape shape-two"></span>
+
+    </div>
+
+    <main class="login-shell register-shell">
+
+        <section class="login-intro"
+                 aria-label="Giới thiệu Flask Lab">
+
+            <a class="login-brand" href="{{ url_for('menu') }}">
+
+                <span class="login-brand-icon">F</span>
+
+                <span>Flask Lab</span>
+
+            </a>
+
+            <span class="intro-tag">
+                Exemple for Students
+            </span>
+
+            <h1>
+                WELCOME TO FLASK.
+                <br>
+                <em>Knowledge is Power.</em>
+            </h1>
+
+            <p>Learn Today, Lead Tomorrow.</p>
+
+            <div class="intro-features">
+                <span>CALCULATOR</span>
+                <span>SCORE</span>
+                <span>BMI</span>
+            </div>
+
+        </section>
+
+        <section class="login-panel register-panel"
+                 aria-label="Biểu mẫu đăng ký">
+
+            <div class="login-panel-heading register-heading">
+
+                <span class="login-mini-mark"
+                      aria-hidden="true">↗</span>
+
+                <h2>ĐĂNG KÝ TÀI KHOẢN</h2>
+
+                <p>Tạo tài khoản mới để sử dụng Flask Lab.</p>
+
+            </div>
+
+            <form
+                method="POST"
+                action="{{ url_for('register') }}"
+                novalidate
+            >
+
+                {{ form.hidden_tag() }}
+
+                {% if form.csrf_token.errors %}
+
+                    <div class="flash flash-error login-message"
+                         role="alert">
+
+                        Biểu mẫu không hợp lệ hoặc đã hết hạn.
+                        Vui lòng tải lại trang.
+
+                    </div>
+
+                {% endif %}
+
+                {{ render_field(
+                    form.username,
+                    '4–20 ký tự: a–z, 0–9, _'
+                ) }}
+
+                {{ render_field(
+                    form.email,
+                    'Nhập địa chỉ email'
+                ) }}
+
+                {{ render_field(
+                    form.password,
+                    'Tối thiểu 8 ký tự'
+                ) }}
+
+                {{ render_field(
+                    form.confirm_password,
+                    'Nhập lại mật khẩu'
+                ) }}
+
+                {{ render_field(form.accept_terms) }}
+
+                <button class="login-submit" type="submit">
+
+                    Đăng ký
+
+                    <span aria-hidden="true">→</span>
+
+                </button>
+
+            </form>
+
+            <p class="register-login-link">
+
+                Đã có tài khoản?
+
+                <a href="{{ url_for('login') }}">
+                    Đăng nhập
+                </a>
+
+            </p>
+
+            <a class="login-back register-back"
+               href="{{ url_for('menu') }}">
+
+                ← Trở về trang chủ
+
+            </a>
+
+            <div class="login-footnote">
+                Trang đăng ký dành cho bài thực hành Flask và Jinja2.
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+
+{% macro render_field(field, placeholder="") %}
+
+    {% if field.type == "BooleanField" %}
+
+        <div class="register-field">
+
+            <label class="remember-choice register-terms"
+                   for="{{ field.id }}">
+
+                {{ field() }}
+
+                <span>{{ field.label.text }}</span>
+            </label>
+
+            {% for error in field.errors %}
+                <p class="error" role="alert">
+                    {{ error }}
+                </p>
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="login-field register-field">
+
+            {{ field.label }}
+
+            {{ field(
+                class_="invalid" if field.errors else "",
+                placeholder=placeholder,
+                autocomplete="new-password" if field.type == "PasswordField" else "off"
+            ) }}
+
+            {% for error in field.errors %}
+                <p class="error" role="alert">
+                    {{ error }}
+                </p>
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+{% endmacro %}

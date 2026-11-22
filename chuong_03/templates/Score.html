@@ -1,0 +1,90 @@
+
+{% extends "base.html" %}
+
+{% block title %}Tính điểm học phần{% endblock %}
+
+{% block content %}
+
+<div class="page-heading">
+    <a class="back-link" href="{{ url_for('menu') }}">
+        ← Về menu
+    </a>
+
+    <h1>Tính điểm học phần</h1>
+
+    <p>
+        Nhập điểm từ 0 đến 10 để tính điểm
+        tổng kết và xếp loại.
+    </p>
+</div>
+
+<section class="panel narrow">
+
+    <form method="POST" novalidate>
+
+        {% for id, name, weight in [
+            ('cc', 'Điểm chuyên cần', '10%'),
+            ('gk', 'Điểm giữa kỳ', '30%'),
+            ('ck', 'Điểm cuối kỳ', '60%')
+        ] %}
+
+        <div class="field">
+
+            <div class="label-line">
+                <label for="{{ id }}">{{ name }}</label>
+                <span class="weight">{{ weight }}</span>
+            </div>
+
+            <input
+                id="{{ id }}"
+                name="{{ id }}"
+                value="{{ values[id] }}"
+                placeholder="Nhập điểm từ 0 đến 10"
+                class="{{ 'invalid' if errors[id] else '' }}"
+            >
+
+            {% if errors[id] %}
+                <p class="error">{{ errors[id] }}</p>
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+        <div class="hint">
+            Tổng kết = CC × 10% + GK × 30% + CK × 60%.
+            <br>
+            Cuối kỳ dưới 1 là điểm liệt (F).
+        </div>
+
+        <button type="submit" class="primary-btn">
+            Tính điểm tổng kết →
+        </button>
+
+    </form>
+
+    {% if total is not none %}
+
+        <div class="result-box {{ 'fail' if grade == 'F' else '' }}">
+
+            <span>KẾT QUẢ HỌC PHẦN</span>
+
+            <strong>
+                {{ "%.2f"|format(total) }} / 10
+            </strong>
+
+            <b>
+                Xếp loại: {{ grade }}
+
+                {% if is_liet %}
+                    — Điểm liệt
+                {% endif %}
+            </b>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Sổ điểm sinh viên</title>
+</head>
+
+<body>
+
+    <h1>SỔ ĐIỂM SINH VIÊN</h1>
+
+    <p>
+        Tổng số sinh viên:
+        <b>{{ tong_sv }}</b>
+    </p>
+
+    <p>
+        Tổng số lớp:
+        <b>{{ tong_lop }}</b>
+    </p>
+
+    <p>
+        <a href="{{ url_for('student_list') }}">
+            Xem danh sách sinh viên
+        </a>
+    </p>
+
+    <p>
+        <a href="{{ url_for('api_students') }}">
+            Xem API sinh viên
+        </a>
+    </p>
+
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+
+<nav aria-label="Điều hướng chính">
+    <a href="{{ url_for('menu') }}" class="{{ 'active' if request.endpoint == 'menu' else '' }}">Menu</a>
+    <a href="{{ url_for('calculator') }}" class="{{ 'active' if request.endpoint == 'calculator' else '' }}">Máy tính</a>
+    <a href="{{ url_for('score') }}" class="{{ 'active' if request.endpoint == 'score' else '' }}">Tính điểm</a>
+    <a href="{{ url_for('bmi') }}" class="{{ 'active' if request.endpoint == 'bmi' else '' }}">BMI</a>
+    {% if session.get('user') %}
+        <a href="{{ url_for('profile') }}" class="nav-user {{ 'active' if request.endpoint == 'profile' else '' }}">Xin chào {{ session['user'] }}</a>
+        <form action="{{ url_for('logout') }}" method="POST" class="nav-logout">
+            <button type="submit">Đăng xuất</button>
+        </form>
+    {% else %}
+        <a href="{{ url_for('login') }}" class="nav-signin">Đăng nhập</a>
+    {% endif %}
+</nav>

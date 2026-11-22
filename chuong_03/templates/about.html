@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% from "_macros.html" import post_card %}
+
+
+{% block title %}
+    Giới thiệu
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="about-box">
+
+        <h1>Giới thiệu</h1>
+
+        <p>
+            Blog minh họa học phần Flask và Jinja2.
+        </p>
+
+        <p>
+            Trang này sử dụng template kế thừa,
+            include, macro và static.
+        </p>
+
+    </div>
+
+
+    <h2>Bài viết</h2>
+
+
+    {% for post in posts %}
+
+        {{ post_card(post) }}
+
+    {% endfor %}
+
+{% endblock %}

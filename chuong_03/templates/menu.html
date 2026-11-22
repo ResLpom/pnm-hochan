@@ -1,0 +1,79 @@
+
+{% extends "base.html" %}
+
+{% block title %}Menu bài thực hành{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <span class="eyebrow">TRANG CHỦ</span>
+
+    <h1>Chọn bài thực hành</h1>
+
+    <p>
+        Ba bài tập Flask trong cùng một ứng dụng.
+        Chọn bài bạn muốn mở bên dưới.
+    </p>
+
+</section>
+
+<div class="card-grid">
+
+    <a class="task-card" href="{{ url_for('calculator') }}">
+
+        <span class="task-icon blue">＋</span>
+        <span class="task-number">BÀI 01</span>
+
+        <h2>Máy tính cơ bản</h2>
+
+        <p>
+            Thực hiện cộng, trừ, nhân, chia;
+            kiểm tra dữ liệu và lỗi chia cho 0.
+        </p>
+
+        <span class="task-link">
+            Mở bài toán →
+        </span>
+
+    </a>
+
+    <a class="task-card" href="{{ url_for('score') }}">
+
+        <span class="task-icon purple">A+</span>
+        <span class="task-number">BÀI 02</span>
+
+        <h2>Tính điểm học phần</h2>
+
+        <p>
+            Nhập điểm chuyên cần, giữa kỳ,
+            cuối kỳ và xếp loại A–F.
+        </p>
+
+        <span class="task-link">
+            Mở bài toán →
+        </span>
+
+    </a>
+
+    <a class="task-card" href="{{ url_for('bmi') }}">
+
+        <span class="task-icon green">BMI</span>
+        <span class="task-number">BÀI 03</span>
+
+        <h2>Tính chỉ số BMI</h2>
+
+        <p>
+            Nhập chiều cao, cân nặng;
+            xem phân loại và khoảng cân nặng phù hợp.
+        </p>
+
+        <span class="task-link">
+            Mở bài toán →
+        </span>
+
+    </a>
+
+</div>
+
+{% endblock %}

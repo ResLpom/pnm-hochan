@@ -1,0 +1,40 @@
+{% macro tag_badges(tags) %}
+
+    {% for tag in tags %}
+
+        <span class="badge">
+            {{ tag }}
+        </span>
+
+    {% endfor %}
+
+{% endmacro %}
+
+
+{% macro post_card(post, show_tags=True) %}
+
+    <div class="card">
+
+        <h2>
+
+            <a href="{{ url_for('post_detail', post_id=post.id) }}">
+                {{ post.title }}
+            </a>
+
+        </h2>
+
+
+        <p>
+            {{ post.content }}
+        </p>
+
+
+        {% if show_tags %}
+
+            {{ tag_badges(post.tags) }}
+
+        {% endif %}
+
+    </div>
+
+{% endmacro %}
